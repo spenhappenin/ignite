@@ -66,10 +66,17 @@ class Company extends React.Component {
         </Segment>
         <br />
         <Field>
-          <p><b>Applied?</b> {company.applied ? <Icon name='check' color='green' size='large' /> : <Icon name='delete' color='red' size='large' />}</p>
+          <p>
+            <b>Applied?</b> 
+            { company.applied ? 
+                <Icon name='check' color='green' size='large' /> 
+              : 
+                <Icon name='delete' color='red' size='large' />
+            }
+          </p>
         </Field>
         <br />
-        {this.displayAppliedInfo(company)}
+        { this.displayAppliedInfo(company) }
         <br />
         <Button.Group icon>
           <Link to={`/companies/${company.id}/edit`}>
