@@ -1,8 +1,8 @@
 import React from 'react';
-import axios from 'axios';
+import GenerateHtml from './GenerateHtml';
 import styled from 'styled-components';
 import { Link, } from 'react-router-dom';
-import { Button, Container, Header, Icon, Search, } from 'semantic-ui-react';
+import { Button, Container, Header, Icon, Search, Table } from 'semantic-ui-react';
 
 class Companies extends React.Component {
   state = { searchText: '', };
@@ -11,10 +11,19 @@ class Companies extends React.Component {
     if (this.props.companies.length <= 0)
       return <Header as='h3'>You have no companies. Go add some!</Header>
 
-    return this.props.companies.map((c, i) => (
-      <StyledCompanyTitle key={i} to={`/companies/${c.id}`}>
-        {c.title}
-      </StyledCompanyTitle>
+    return this.props.companies.map( (c, i) => (
+      // <Link to={`/companies/${c.id}`}>
+        <Table.Row>
+          <Table.Cell>{c.title}</Table.Cell>
+          <Table.Cell>{c.location}</Table.Cell>
+          <Table.Cell>
+            <GenerateHtml text={c.description} />
+          </Table.Cell>
+        </Table.Row>
+      // </Link>
+      // <StyledCompanyTitle key={i} to={`/companies/${c.id}`}>
+      //   {c.title}
+      // </StyledCompanyTitle>
     ));
   };
 
@@ -34,9 +43,18 @@ class Companies extends React.Component {
         </div>
         <br />
         <br />
-        <div style={{ display: 'inline-block' }}>
-          { this.displayCompanies() }
-        </div>
+        <Table celled padded>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Title</Table.HeaderCell>
+              <Table.HeaderCell>Location</Table.HeaderCell>
+              <Table.HeaderCell>Description</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            { this.displayCompanies() }
+          </Table.Body>
+        </Table>
         <br />
         <br />
         <br />
