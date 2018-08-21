@@ -1,14 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './components/App';
+import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import store from './store';
+import { BrowserRouter, } from 'react-router-dom';
+import { initMiddleware, } from 'devise-axios';
+import { Provider, } from 'react-redux';
 import 'semantic-ui-css/semantic.min.css';
-import { initMiddleware } from 'devise-axios';
+import 'react-quill/dist/quill.snow.css';
 
-initMiddleware()
+initMiddleware();
 
 ReactDOM.render(
   <Provider store={store}>
@@ -18,4 +19,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
 registerServiceWorker();

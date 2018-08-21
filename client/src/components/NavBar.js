@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Menu } from 'semantic-ui-react';
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { handleLogout } from '../reducers/user';
+import React from 'react';
+import { connect, } from 'react-redux';
+import { handleLogout, } from '../reducers/user';
+import { Menu, } from 'semantic-ui-react';
+import { Link, withRouter, } from 'react-router-dom';
 
-class NavBar extends Component {
+class NavBar extends React.Component {
   rightNavs = () => {
     const { user, dispatch, history } = this.props;
 
@@ -36,6 +36,9 @@ class NavBar extends Component {
         <Menu pointing secondary>
           <Link to='/'>
             <Menu.Item name='home' />
+          </Link>
+          <Link to='/companies'>
+            <Menu.Item name='My Companies' />
           </Link>
           { this.rightNavs() }
         </Menu>

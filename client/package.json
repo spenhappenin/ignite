@@ -7,12 +7,15 @@
     "devise-axios": "^1.0.8",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-particles-js": "^2.3.0",
+    "react-quill": "^1.3.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.3.3",
-    "semantic-ui-react": "^0.82.2"
+    "semantic-ui-react": "^0.82.2",
+    "styled-components": "^3.4.2"
   },
   "devDependencies": {
     "react-scripts": "1.1.4"
