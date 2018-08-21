@@ -12,18 +12,17 @@ class Companies extends React.Component {
       return <Header as='h3'>You have no companies. Go add some!</Header>
 
     return this.props.companies.map( (c, i) => (
-      // <Link to={`/companies/${c.id}`}>
         <Table.Row>
-          <Table.Cell>{c.title}</Table.Cell>
+          <Table.Cell width={5}>
+            <StyledCompanyTitle key={i} to={`/companies/${c.id}`}>
+              {c.title}
+            </StyledCompanyTitle>
+          </Table.Cell>
           <Table.Cell>{c.location}</Table.Cell>
-          <Table.Cell>
+          <Table.Cell width={8}>
             <GenerateHtml text={c.description} />
           </Table.Cell>
         </Table.Row>
-      // </Link>
-      // <StyledCompanyTitle key={i} to={`/companies/${c.id}`}>
-      //   {c.title}
-      // </StyledCompanyTitle>
     ));
   };
 
@@ -43,7 +42,7 @@ class Companies extends React.Component {
         </div>
         <br />
         <br />
-        <Table celled padded>
+        <Table celled padded striped>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Title</Table.HeaderCell>
