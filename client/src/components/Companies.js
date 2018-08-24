@@ -2,7 +2,7 @@ import React from 'react';
 import GenerateHtml from './GenerateHtml';
 import styled from 'styled-components';
 import { Link, } from 'react-router-dom';
-import { Button, Container, Header, Icon, Search, Table } from 'semantic-ui-react';
+import { Button, Container, Header, Icon, Image, Search, Table } from 'semantic-ui-react';
 
 class Companies extends React.Component {
   state = { searchText: '', };
@@ -15,8 +15,15 @@ class Companies extends React.Component {
         <Table.Row>
           <Table.Cell width={5}>
             <StyledCompanyTitle key={i} to={`/companies/${c.id}`}>
-              {c.title}
+              { c.title }
             </StyledCompanyTitle>
+          </Table.Cell>
+          <Table.Cell>
+            <Image
+              src={c.image}
+              size='tiny'
+              style={{ marginRight: '12px', }}
+            />
           </Table.Cell>
           <Table.Cell>{c.location}</Table.Cell>
           <Table.Cell width={8}>
@@ -46,6 +53,7 @@ class Companies extends React.Component {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Title</Table.HeaderCell>
+              <Table.HeaderCell>Logo</Table.HeaderCell>
               <Table.HeaderCell>Location</Table.HeaderCell>
               <Table.HeaderCell>Description</Table.HeaderCell>
             </Table.Row>

@@ -6,38 +6,46 @@ import { Redirect } from 'react-router-dom';
 import { Button, Checkbox, Container, Form, Header, Input, TextArea, } from 'semantic-ui-react';
 
 class CompanyEditForm extends React.Component {
-  state = { applied: false, contacts: '', description: '', location: '', position: '', position_details: '', setFormData: false, title: '', };
+  state = { 
+    applied: false, 
+    contacts: '', 
+    description: '', 
+    image: '',
+    location: '', 
+    position: '', 
+    position_details: '', 
+    setFormData: false, 
+    title: '', 
+  };
 
   componentDidMount() {
     this.setState({ company: this.props.companies.find(c => c.id === parseInt(this.props.match.params.id)), });
   };
 
   componentDidUpdate() {
-    const { company: { applied, contacts, description, location, position, position_details, title, }, setFormData, } = this.state;
+    const { company: { applied, contacts, description, image, location, position, position_details, title, }, setFormData, } = this.state;
 
     if (this.state.setFormData !== true) {
-      this.setState({ applied, contacts, description, location, position, position_details, title, setFormData: true, });
+      this.setState({ applied, contacts, description, image, location, position, position_details, title, setFormData: true, });
     }
   };
 
-  handleChange = (e) => this.setState({ [e.target.name]: e.target.value });
+  handleChange = (e) => this.setState({ [e.target.name]: e.target.value, });
 
-  toggleCheckbox = () => this.setState({ applied: !this.state.applied });
+  toggleCheckbox = () => this.setState({ applied: !this.state.applied, });
 
   handleSubmit = (e) => {
     const { dispatch, history, match, updateCompanies, } = this.props;
-    const { applied, contacts, description, location, position, position_details, title, company: { id, }, } = this.state;
-    const company = { applied, contacts, description, id, location, position, position_details: position_details, title, };
+    const { applied, contacts, description, image, location, position, position_details, title, company: { id, }, } = this.state;
+    const company = { applied, contacts, description, id, image, location, position, position_details: position_details, title, };
 
     e.preventDefault();
     axios.put(`/api/companies/${id}/edit`, company)
-      .then(res => {
-        // dispatch(setFlash('Company updated.', 'green'));
+      .then( res => {
         updateCompanies(company);
         history.push('/companies');
       })
-      .catch(err => {
-        // dispatch(setFlash('Error. Please try again later.', 'red'));
+      .catch( err => {
       })
   };
 
@@ -46,7 +54,7 @@ class CompanyEditForm extends React.Component {
   };
 
   render() {
-    const { applied, contacts, description, location, position, position_details, title, } = this.state;
+    const { applied, contacts, description, image, location, position, position_details, title, } = this.state;
 
     return (
       <Container>
@@ -71,6 +79,15 @@ class CompanyEditForm extends React.Component {
             placeholder='The company is all about culture and...'
             required
             onChange={(value) => this.handleQuill(value, 'description')}
+          />
+          <Form.Field
+            name='image'
+            control={Input}
+            label='company logo'
+            placeholder='https://some-image-url.com'
+            required
+            value={image}
+            onChange={this.handleChange}
           />
           <Form.Field
             name='location'
