@@ -2072,8 +2072,8 @@ detect-port-alt@1.1.6:
     debug "^2.6.0"
 
 devise-axios@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/devise-axios/-/devise-axios-1.0.8.tgz#8f57d290da45b9085137bdaa890fb76aa1076e51"
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/devise-axios/-/devise-axios-1.0.12.tgz#e845818805212524aaaf5377710526d2ee2c17f2"
   dependencies:
     regenerator-runtime "^0.12.1"
 

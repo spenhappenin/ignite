@@ -6,7 +6,7 @@ import { Redirect, } from 'react-router-dom';
 import { Button, Checkbox, Container, Form, Header, Input, TextArea, } from 'semantic-ui-react';
 
 class CompanyForm extends React.Component {
-  state = { applied: '', contacts: '', description: '', location: '', position: '', positionDetails: '', title: '', };
+  state = { applied: '', contacts: '', description: '', image: '', location: '', position: '', positionDetails: '', title: '', };
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -19,16 +19,14 @@ class CompanyForm extends React.Component {
   toggleCheckbox = () => this.setState({ applied: !this.state.applied });
 
   handleSubmit = (e) => {
-    const { applied, contacts, description, location, position, positionDetails, title, } = this.state;
+    const { applied, contacts, description, image, location, position, positionDetails, title, } = this.state;
 
     e.preventDefault();
-    axios.post('/api/companies/new', { applied, contacts, description, location, position, position_details: positionDetails, title, })
-      .then(res => {
-        // this.props.dispatch(setFlash('Company added.', 'green'));
+    axios.post('/api/companies/new', { applied, contacts, description, image, location, position, position_details: positionDetails, title, })
+      .then( res => {
         this.props.history.push('/companies');
       })
-      .catch(err => {
-        // this.props.dispatch(setFlash('Error. Please try again later.', 'red'));
+      .catch( err => {
       })
   };
 
@@ -57,6 +55,14 @@ class CompanyForm extends React.Component {
             onChange={(value) => this.handleQuill(value, 'description')}
           />
           <br />
+          <Form.Field
+            name='image'
+            control={Input}
+            label='Company Logo'
+            placeholder='http://some-cool-image-url.com'
+            required
+            onChange={this.handleChange}
+          />
           <Form.Field
             name='location'
             control={Input}

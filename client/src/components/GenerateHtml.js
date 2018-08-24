@@ -6,7 +6,7 @@ const createMarkup = (html) => {
 };
 
 const GenerateHtml = (props) => (
-  <Container
+  <div
     dangerouslySetInnerHTML={createMarkup(props.text)}
   />
 );

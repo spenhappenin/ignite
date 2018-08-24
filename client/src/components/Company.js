@@ -2,7 +2,7 @@ import React, { Fragment, } from 'react';
 import GenerateHtml from './GenerateHtml';
 import styled from 'styled-components';
 import { Link, } from 'react-router-dom';
-import { Button, Container, Header, Icon, Segment, } from 'semantic-ui-react';
+import { Button, Container, Header, Icon, Image, Segment, } from 'semantic-ui-react';
 
 class Company extends React.Component {
   state = { company: null, };
@@ -42,6 +42,13 @@ class Company extends React.Component {
       <Container>
         <br />
         <Header as='h2'>{company.title}</Header>
+        <Header as='h5'>Company Logo:</Header>
+        {
+          company.image ?
+            <Image src={company.image} size='small' />
+            :
+            <p>No company logo added...</p>
+        }
         <Header as='h5'>Company Description:</Header>
         <Segment>
           {
