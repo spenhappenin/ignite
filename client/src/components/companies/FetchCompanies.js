@@ -4,7 +4,7 @@ import Companies from './Companies';
 import Company from './Company';
 import CompanyEditForm from './CompanyEditForm';
 import CompanyForm from './CompanyForm';
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from '../ProtectedRoute';
 import { Switch, } from 'react-router-dom';
 
 class FetchCompanies extends React.Component {

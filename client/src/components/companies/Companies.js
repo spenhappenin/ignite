@@ -1,5 +1,5 @@
 import React from 'react';
-import GenerateHtml from './GenerateHtml';
+import GenerateHtml from '../GenerateHtml';
 import styled from 'styled-components';
 import { Link, } from 'react-router-dom';
 import { Button, Container, Header, Icon, Image, Search, Table } from 'semantic-ui-react';
