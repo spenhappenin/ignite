@@ -2,16 +2,21 @@ import React from 'react';
 import GenerateHtml from '../GenerateHtml';
 import styled from 'styled-components';
 import { Link, } from 'react-router-dom';
-import { Button, Checkbox, Container, Header, Icon, Image, Search, Table } from 'semantic-ui-react';
+import { Button, Checkbox, Container, Header, Icon, Image, Input, Table } from 'semantic-ui-react';
 
 class Companies extends React.Component {
-  state = { applied: false, searchText: '', tableView: true, };
+  state = { applied: false, search: '', tableView: true, };
 
   displayTableView = () => {
+    let filteredCompanies = this.props.companies.filter( company => {
+      return company.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || 
+      company.location.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 ;
+    });
+
     if (this.props.companies.length <= 0)
       return <Header as='h3'>You have no companies. Go add some!</Header>
 
-    return this.props.companies.map( c => {
+    return filteredCompanies.map( c => {
       if (this.state.applied) {
         return c.applied ? 
           this.renderTableRow(c)
@@ -25,7 +30,11 @@ class Companies extends React.Component {
   };
 
   displayListView = () => {
-    return this.props.companies.map( c => {
+    let filteredCompanies = this.props.companies.filter( company => {
+      return company.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+    });
+
+    return filteredCompanies.map( c => {
       if (this.state.applied) {
         return c.applied ?
           <StyledCompanyTitle key={c.id} to={`/companies/${c.id}`}>
@@ -67,13 +76,24 @@ class Companies extends React.Component {
 
   toggleView = () => this.setState({ tableView: !this.state.tableView, });
 
+  updateSearch = (e) => this.setState({ search: e.target.value.substr(0, 20), });
+
   render() {
     return (
       <Container>
         <br />
         <Header as='h1'>Companies</Header>
         <div style={{ display: 'flex', }}>
-          <Search style={{ marginRight: '20px', }} />
+          <SearchBar>
+            <SearchInput
+              type='text' 
+              value={this.state.search}
+              onChange={this.updateSearch}
+            />
+            <SearchIconContainer>
+              <Icon name='search' size='large' color='grey' style={{ marginLeft: '3.5px', }} />
+            </SearchIconContainer>
+          </SearchBar>
           <Link to='/companies/new'>
             <Button color='blue'>
               <Icon name='add' />
@@ -115,6 +135,24 @@ class Companies extends React.Component {
     );
   };
 };
+
+const SearchBar = styled.div`
+  border: 1px solid #dededf;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  padding: 10px;
+`;
+
+const SearchInput = styled.input`
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+`;
+
+const SearchIconContainer = styled.div`
+  margin-left: 3.5px;
+`;
 
 const StyledCompanyTitle = styled(Link)`
   font-size: 20px;
