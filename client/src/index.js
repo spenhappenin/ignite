@@ -2,6 +2,7 @@ import React from 'react';
 import App from './components/App';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
+import ScrollToTop from './components/ScrollToTop';
 import store from './store';
 import { BrowserRouter, } from 'react-router-dom';
 import { initMiddleware, } from 'devise-axios';
@@ -14,7 +15,9 @@ initMiddleware();
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ScrollToTop>
+        <App />
+      </ScrollToTop>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
