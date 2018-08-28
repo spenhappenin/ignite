@@ -34,7 +34,7 @@ const settings = {
       }
     },
     "color": {
-      "value": "#ffe38c"
+      "value": "#0ef"
     },
     "shape": {
       "type": "edge",
@@ -80,7 +80,7 @@ const settings = {
     },
     "move": {
       "enable": true,
-      "speed": 2,
+      "speed": 2.5,
       "direction": "top",
       "random": true,
       "straight": false,
