@@ -2,44 +2,68 @@ import React from 'react';
 import GenerateHtml from '../GenerateHtml';
 import styled from 'styled-components';
 import { Link, } from 'react-router-dom';
-import { Button, Container, Header, Icon, Image, Search, Table } from 'semantic-ui-react';
+import { Button, Checkbox, Container, Header, Icon, Image, Search, Table } from 'semantic-ui-react';
 
 class Companies extends React.Component {
-  state = { searchText: '', tableView: true, };
+  state = { applied: false, searchText: '', tableView: true, };
 
-  displayCompanies = () => {
+  displayTableView = () => {
     if (this.props.companies.length <= 0)
       return <Header as='h3'>You have no companies. Go add some!</Header>
 
-    return this.props.companies.map( (c, i) => (
-      <Table.Row>
-        <Table.Cell width={5}>
-          <StyledCompanyTitle key={i} to={`/companies/${c.id}`}>
-            { c.title }
-          </StyledCompanyTitle>
-        </Table.Cell>
-        <Table.Cell>
-          <Image
-            src={c.image}
-            size='tiny'
-            style={{ marginRight: '12px', }}
-          />
-        </Table.Cell>
-        <Table.Cell>{c.location}</Table.Cell>
-        <Table.Cell width={8}>
-          <GenerateHtml text={c.description} />
-        </Table.Cell>
-      </Table.Row>
-    ));
+    return this.props.companies.map( c => {
+      if (this.state.applied) {
+        return c.applied ? 
+          this.renderTableRow(c)
+        :
+          null
+      };
+      return (
+        this.renderTableRow(c)
+      );
+    });
   };
 
   displayListView = () => {
-    return this.props.companies.map((c, i) => (
-      <StyledCompanyTitle key={i} to={`/companies/${c.id}`}>
-        {c.title}
-      </StyledCompanyTitle>
-    ));
+    return this.props.companies.map( c => {
+      if (this.state.applied) {
+        return c.applied ?
+          <StyledCompanyTitle key={c.id} to={`/companies/${c.id}`}>
+            { c.title }
+          </StyledCompanyTitle>
+        :
+          null
+      };
+      return (
+        <StyledCompanyTitle key={c.id} to={`/companies/${c.id}`}>
+          { c.title }
+        </StyledCompanyTitle>
+      );
+    });
   };
+
+  renderTableRow = (c) => (
+    <Table.Row key={c.id}>
+      <Table.Cell width={5}>
+        <StyledCompanyTitle to={`/companies/${c.id}`}>
+          { c.title }
+        </StyledCompanyTitle>
+      </Table.Cell>
+      <Table.Cell>
+        <Image
+          src={c.image}
+          size='tiny'
+          style={{ marginRight: '12px', }}
+        />
+      </Table.Cell>
+      <Table.Cell>{c.location}</Table.Cell>
+      <Table.Cell width={8}>
+        <GenerateHtml text={c.description} />
+      </Table.Cell>
+    </Table.Row>
+  );
+
+  toggleCheckbox = () => this.setState({ applied: !this.state.applied, });
 
   toggleView = () => this.setState({ tableView: !this.state.tableView, });
 
@@ -58,9 +82,10 @@ class Companies extends React.Component {
           </Link>
         </div>
         <br />
-        <button onClick={this.toggleView} style={{ display: 'inline-block', padding: '10px', cursor: 'pointer' }}>
+        <button onClick={this.toggleView} style={{ display: 'inline-block', padding: '10px', cursor: 'pointer', marginRight: '20px' }}>
           { this.state.tableView ? "List View" : "Table View" }
         </button>
+        <Checkbox onChange={this.toggleCheckbox} label='Show Applied' />
         <br />
         {
           this.state.tableView ? 
@@ -74,7 +99,7 @@ class Companies extends React.Component {
                 </Table.Row>
               </Table.Header>
               <Table.Body>
-                { this.displayCompanies() }
+                { this.displayTableView() }
               </Table.Body>
             </Table>
           :
