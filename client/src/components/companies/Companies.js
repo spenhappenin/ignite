@@ -2,7 +2,7 @@ import React from 'react';
 import GenerateHtml from '../GenerateHtml';
 import styled from 'styled-components';
 import { Link, } from 'react-router-dom';
-import { Button, Checkbox, Container, Header, Icon, Image, Input, Table } from 'semantic-ui-react';
+import { Button, Checkbox, Container, Header, Icon, Image, Table } from 'semantic-ui-react';
 
 class Companies extends React.Component {
   state = { applied: false, search: '', tableView: true, };

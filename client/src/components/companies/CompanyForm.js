@@ -2,21 +2,20 @@ import React from 'react';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import { connect, } from 'react-redux';
-import { Redirect, } from 'react-router-dom';
-import { Button, Checkbox, Container, Form, Header, Input, TextArea, } from 'semantic-ui-react';
+import { Button, Checkbox, Container, Form, Header, Input, } from 'semantic-ui-react';
 
 class CompanyForm extends React.Component {
   state = { applied: '', contacts: '', description: '', image: '', location: '', position: '', positionDetails: '', title: '', };
 
   handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  }
+    this.setState({ [e.target.name]: e.target.value, });
+  };
 
   handleQuill = (value, name) => {
     this.setState({ [name]: value });
   };
 
-  toggleCheckbox = () => this.setState({ applied: !this.state.applied });
+  toggleCheckbox = () => this.setState({ applied: !this.state.applied, });
 
   handleSubmit = (e) => {
     const { applied, contacts, description, image, location, position, positionDetails, title, } = this.state;

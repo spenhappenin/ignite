@@ -8,7 +8,7 @@ class Company extends React.Component {
   state = { company: null, };
 
   componentDidMount() {
-    this.setState({ company: this.props.companies.find(c => c.id === parseInt(this.props.match.params.id)) });
+    this.setState({ company: this.props.companies.find( c => c.id === parseInt(this.props.match.params.id, 10)), });
   };
 
   displayAppliedInfo = (company) => {

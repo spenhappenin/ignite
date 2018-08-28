@@ -2,8 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { Button, Checkbox, Container, Form, Header, Input, TextArea, } from 'semantic-ui-react';
+import { Button, Checkbox, Container, Form, Header, Input, } from 'semantic-ui-react';
 
 class CompanyEditForm extends React.Component {
   state = { 
@@ -19,11 +18,11 @@ class CompanyEditForm extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ company: this.props.companies.find(c => c.id === parseInt(this.props.match.params.id)), });
+    this.setState({ company: this.props.companies.find(c => c.id === parseInt(this.props.match.params.id, 10)), });
   };
 
   componentDidUpdate() {
-    const { company: { applied, contacts, description, image, location, position, position_details, title, }, setFormData, } = this.state;
+    const { company: { applied, contacts, description, image, location, position, position_details, title, }, } = this.state;
 
     if (this.state.setFormData !== true) {
       this.setState({ applied, contacts, description, image, location, position, position_details, title, setFormData: true, });
@@ -35,7 +34,7 @@ class CompanyEditForm extends React.Component {
   toggleCheckbox = () => this.setState({ applied: !this.state.applied, });
 
   handleSubmit = (e) => {
-    const { dispatch, history, match, updateCompanies, } = this.props;
+    const { history, updateCompanies, } = this.props;
     const { applied, contacts, description, image, location, position, position_details, title, company: { id, }, } = this.state;
     const company = { applied, contacts, description, id, image, location, position, position_details: position_details, title, };
 
