@@ -1,33 +1,48 @@
 import React from 'react';
 import Particles from 'react-particles-js';
 import styled from 'styled-components';
+import Fire from '../../images/fire.svg';
 import { Header, } from 'semantic-ui-react';
 
 class Home extends React.Component {
   render() {
     return (
-      <div>
+      <HomeContainer>
+        {/* <FireContainer src={Fire} /> */}
         <ParticlesContainer params={settings}>
           <Header as='h1' textAlign='center'>Home Component</Header>
           <Header as='h1' inverted></Header>
         </ParticlesContainer>
-      </div>
+      </HomeContainer>
     );
   };
 };
 
-const ParticlesContainer = styled(Particles)`
+const HomeContainer = styled.div`
   background: #273149;
   background: -moz-linear-gradient(top, #273149 0%, #3c4c70 100%);
   background: -webkit-linear-gradient(top, #273149 0%,#3c4c70 100%);
   background: linear-gradient(to bottom, #273149 0%,#3c4c70 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#273149', endColorstr='#3c4c70',GradientType=0 );
+  height: 1000px;
+`;
+
+const ParticlesContainer = styled(Particles)`
+  z-index: 10;
+  margin-top: -100px;
+`;
+
+const FireContainer = styled.img`
+  z-index: 999;
+  width: 100%;
+  height: 250px;
+  position: absolute;
 `;
 
 const settings = {
   "particles": {
     "number": {
-      "value": 125,
+      "value": 50,
       "density": {
         "enable": true,
         "value_area": 800
