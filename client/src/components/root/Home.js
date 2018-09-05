@@ -11,7 +11,6 @@ class Home extends React.Component {
         <CanvasContainer id='canvas-container'>
           <ParticlesContainer params={settings}>
           </ParticlesContainer>
-          {/* <Test id='overlay' /> */}
         </CanvasContainer>
       </HomeContainer>
     );
@@ -19,14 +18,7 @@ class Home extends React.Component {
 };
 
 const CanvasContainer = styled.div`
-  position: relative;
-`;
-
-const Test = styled.div`
-  background: red;
-  height: 200px;
-  width: 200px;
-  position: absolute;
+  /* position: relative; */
 `;
 
 const HomeContainer = styled.div`
@@ -39,7 +31,6 @@ const HomeContainer = styled.div`
 `;
 
 const ParticlesContainer = styled(Particles)`
-  /* position: absolute; */
   margin-top: -100px;
   width: 100%;
   height: 100%;
