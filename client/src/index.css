@@ -1,0 +1,11 @@
+* {
+  /* z-index: 2 !important; */
+}
+
+#canvas-container {
+  /* position: relative; */
+}
+
+#canvas-container canvas, #overlay {
+  /* position: absolute; */
+}

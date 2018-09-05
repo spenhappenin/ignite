@@ -8,28 +8,44 @@ class Home extends React.Component {
   render() {
     return (
       <HomeContainer>
-        {/* <FireContainer src={Fire} /> */}
-        <ParticlesContainer params={settings}>
-          <Header as='h1' textAlign='center'>Home Component</Header>
-          <Header as='h1' inverted></Header>
-        </ParticlesContainer>
+        <CanvasContainer id='canvas-container'>
+          <ParticlesContainer params={settings}>
+          </ParticlesContainer>
+          {/* <Test id='overlay' /> */}
+        </CanvasContainer>
       </HomeContainer>
     );
   };
 };
 
+const CanvasContainer = styled.div`
+  position: relative;
+`;
+
+const Test = styled.div`
+  background: red;
+  height: 200px;
+  width: 200px;
+  position: absolute;
+`;
+
 const HomeContainer = styled.div`
-  background: #273149;
-  background: -moz-linear-gradient(top, #273149 0%, #3c4c70 100%);
-  background: -webkit-linear-gradient(top, #273149 0%,#3c4c70 100%);
-  background: linear-gradient(to bottom, #273149 0%,#3c4c70 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#273149', endColorstr='#3c4c70',GradientType=0 );
+  background: #363b4d;
+  background: -moz-linear-gradient(top, #363b4d 0%, #40485d 100%);
+  background: -webkit-linear-gradient(top, #363b4d 0%,#40485d 100%);
+  background: linear-gradient(to bottom, #363b4d 0%,#40485d 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#363b4d', endColorstr='#40485d',GradientType=0 );
   height: 1000px;
 `;
 
 const ParticlesContainer = styled(Particles)`
-  z-index: 10;
+  /* position: absolute; */
   margin-top: -100px;
+  width: 100%;
+  height: 100%;
+  /* z-index: 1 !important; */
+  /* pointer-events: none; */
+
 `;
 
 const FireContainer = styled.img`
@@ -148,6 +164,6 @@ const settings = {
     }
   },
   "retina_detect": true
-}
+};
 
 export default Home;

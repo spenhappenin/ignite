@@ -7,6 +7,7 @@ import store from './store';
 import { BrowserRouter, } from 'react-router-dom';
 import { initMiddleware, } from 'devise-axios';
 import { Provider, } from 'react-redux';
+import './index.css';
 import 'semantic-ui-css/semantic.min.css';
 import 'react-quill/dist/quill.snow.css';
 
