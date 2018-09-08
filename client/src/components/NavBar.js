@@ -7,6 +7,7 @@ import { Button, Menu, } from 'semantic-ui-react';
 import { Link, withRouter, } from 'react-router-dom';
 
 class NavBar extends React.Component {
+
   rightNavs = () => {
     const { user, dispatch, history } = this.props;
 
@@ -26,8 +27,11 @@ class NavBar extends React.Component {
     }
     return (
       <Menu.Menu position='right' style={{display: 'flex', alignItems: 'center'}}>
-        <Link to='/companies'>
-          <NavItem name='COMPANIES' />
+        <Link to='/'>
+          <NavItem name='FEATURES' />
+        </Link>
+        <Link to='/'>
+          <NavItem name='FAQ' />
         </Link>
         <Link to='/login'>
           <NavItem name='SIGN IN' style={{ color: 'white' }} />
@@ -37,17 +41,17 @@ class NavBar extends React.Component {
         </SignUpButton>
       </Menu.Menu>
     );
-  }
+  };
 
   render() {
     return (
-      <StyledNavbar pointing secondary>
+      <WebNavbar pointing secondary>
         <Link to='/' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
           <img src={Fire} style={{ height: '60px', }} />
           <Logo name='IGNITE' />
         </Link>
         { this.rightNavs() }
-      </StyledNavbar>
+      </WebNavbar>
     );
   };
 };
@@ -64,7 +68,7 @@ const Logo = styled(Menu.Item)`
   padding: 10px 0 0 10px !important;
 `;
 
-const StyledNavbar = styled(Menu)`
+const WebNavbar = styled(Menu)`
   background: #283149 !important; 
   border-bottom: none !important;
   height: 75px;
@@ -72,6 +76,22 @@ const StyledNavbar = styled(Menu)`
   align-items: center;
   margin-bottom: 0 !important;
   padding: 50px 100px 50px 100px;
+`;
+
+const AppLogo = styled(Menu.Item)`
+  font-family: 'Cabin Sketch', cursive !important;
+  /* color: white !important; */
+  /* letter-spacing: 1.5px; */
+  /* font-size: 38px; */
+  /* padding: 10px 0 0 10px !important; */
+`;
+
+const AppNavbar = styled(Menu)`
+  background: #283149 !important; 
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 10px 40px 10px 40px;
 `;
 
 const NavItem = styled(Menu.Item)`

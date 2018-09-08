@@ -9,6 +9,7 @@ import NavBar from './NavBar';
 import NoMatch from './NoMatch';
 import ProtectedRoute from './ProtectedRoute';
 import Register from './Register';
+import RenderNavbar from './RenderNavbar';
 import { Route, Switch, } from 'react-router-dom';
 
 class App extends Component {
@@ -16,7 +17,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NavBar />
+        <RenderNavbar />
+        {/* <NavBar /> */}
         <Flash />
         <FetchUser>
           <Switch>
