@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :companies
+  has_many :contacts
 end
