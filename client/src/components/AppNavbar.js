@@ -5,7 +5,7 @@ import SettingsIcon from '../images/gear-option.svg';
 import UserIcon from '../images/user-silhouette.svg';
 import { connect, } from 'react-redux';
 import { handleLogout, } from '../reducers/user';
-import { Icon, Menu, } from 'semantic-ui-react';
+import { Menu, Popup, } from 'semantic-ui-react';
 import { Link, withRouter, } from 'react-router-dom';
 
 class AppNavbar extends React.Component {
@@ -17,13 +17,38 @@ class AppNavbar extends React.Component {
       return (
         <Menu.Menu position='right' style={{ display: 'flex', alignItems: 'center' }}>
           <SettingsIconContainer src={SettingsIcon} />
-          <UserIconContainer onClick={() => dispatch(handleLogout(history))}>
-            <img src={UserIcon} style={{ height: '22px', width: '22px', }} />
-          </UserIconContainer>
+          {/* <UserIconContainer onClick={() => dispatch(handleLogout(history))}> */}
+          <Popup 
+            trigger={
+              <UserIconContainer>
+                <img src={UserIcon} style={{ height: '22px', width: '22px', }} />
+              </UserIconContainer>
+            }
+            content={this.popupContent}
+            on='click'
+            position='bottom center'
+            hideOnScroll
+          />
         </Menu.Menu>
       );
     };
   };
+
+  popupContent = () => (
+    <div style={{ width: '200px', }}>
+      <div style={{ marginBottom: '20px', }}>
+        <h3 style={{ marginBottom: 0, }}>{ this.props.user.name ? this.props.user.name : 'No Name Added' }</h3>
+        <p style={{ color: '#636363', }}>{ this.props.user.email }</p>
+      </div>
+      <hr />
+      <div>
+        <PopupItem to='/'>
+          <p>Settings</p>
+        </PopupItem>
+        <SignOut onClick={() => this.props.dispatch(handleLogout(this.props.history))}>Sign Out</SignOut>
+      </div>
+    </div>
+  );
 
   render() {
     return (
@@ -34,6 +59,12 @@ class AppNavbar extends React.Component {
         <Link to='/companies'>
           <NavItem name='Companies' />
         </Link>
+        <Link to='/companies'>
+          <NavItem name='Topics' />
+        </Link>
+        <Link to='/companies'>
+          <NavItem name='Statistics' />
+        </Link>
         { this.rightNavs() }
       </StyledAppNavbar>
     );
@@ -43,6 +74,33 @@ class AppNavbar extends React.Component {
 const mapStateToProps = state => {
   return { user: state.user, };
 };
+
+const SignOut = styled.p`
+  cursor: pointer;
+  margin-top: 10px;
+  color: #ff5600;
+  font-weight: bold;
+  padding: 8px 10px 8px 5px;
+  display: flex;
+
+  &:hover {
+    background: #ededed;
+  }
+`;
+
+const PopupItem = styled(Link)`
+  display: flex;
+  padding: 8px 10px 8px 5px;
+  border-radius: 3px;
+
+  &:hover {
+    background: #ededed;
+  }
+
+  > p {
+    color: black;
+  }
+`;
 
 const StyledAppNavbar = styled(Menu)`
   background: #283149 !important; 
