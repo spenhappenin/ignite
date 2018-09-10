@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     delete '/companies/:id', to: 'companies#destroy'
 
     #Contacts
-    get "/contacts", to: "contacts#index"
-    post "/contacts/new", to: "contacts#create"
+    get "/company/:company_id/contacts", to: "contacts#index"
+    post "/company/:company_id/contacts/new", to: "contacts#create"
     put "/contacts/:id/edit", to: "contacts#update"
     delete "/contacts/:id", to: "contacts#destroy"
   end

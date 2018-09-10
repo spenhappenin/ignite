@@ -7,7 +7,6 @@ import { Button, Checkbox, Container, Form, Header, Input, } from 'semantic-ui-r
 class CompanyEditForm extends React.Component {
   state = { 
     applied: false, 
-    contacts: '', 
     description: '', 
     image: '',
     location: '', 
@@ -22,10 +21,10 @@ class CompanyEditForm extends React.Component {
   };
 
   componentDidUpdate() {
-    const { company: { applied, contacts, description, image, location, position, position_details, title, }, } = this.state;
+    const { company: { applied, description, image, location, position, position_details, title, }, } = this.state;
 
     if (this.state.setFormData !== true) {
-      this.setState({ applied, contacts, description, image, location, position, position_details, title, setFormData: true, });
+      this.setState({ applied, description, image, location, position, position_details, title, setFormData: true, });
     }
   };
 
@@ -35,8 +34,8 @@ class CompanyEditForm extends React.Component {
 
   handleSubmit = (e) => {
     const { history, updateCompanies, } = this.props;
-    const { applied, contacts, description, image, location, position, position_details, title, company: { id, }, } = this.state;
-    const company = { applied, contacts, description, id, image, location, position, position_details: position_details, title, };
+    const { applied, description, image, location, position, position_details, title, company: { id, }, } = this.state;
+    const company = { applied, description, id, image, location, position, position_details: position_details, title, };
 
     e.preventDefault();
     axios.put(`/api/companies/${id}/edit`, company)
@@ -45,6 +44,7 @@ class CompanyEditForm extends React.Component {
         history.push('/companies');
       })
       .catch( err => {
+        console.log(err);
       })
   };
 
@@ -53,7 +53,7 @@ class CompanyEditForm extends React.Component {
   };
 
   render() {
-    const { applied, contacts, description, image, location, position, position_details, title, } = this.state;
+    const { applied, description, image, location, position, position_details, title, } = this.state;
 
     return (
       <Container>
@@ -79,6 +79,7 @@ class CompanyEditForm extends React.Component {
             required
             onChange={(value) => this.handleQuill(value, 'description')}
           />
+          <br />
           <Form.Field
             name='image'
             control={Input}
@@ -96,31 +97,6 @@ class CompanyEditForm extends React.Component {
             required
             value={location}
             onChange={this.handleChange}
-          />
-          <label>Company Contacts</label>
-          <ReactQuill
-            value={contacts}
-            name='contacts'
-            placeholder='Company contact information...'
-            onChange={(value) => this.handleQuill(value, 'contacts')}
-          />
-          <br />
-          <Form.Field
-            name='position'
-            control={Input}
-            label='Position'
-            placeholder='Front End Developer'
-            value={position}
-            onChange={this.handleChange}
-          />
-          <label>Position Details</label>
-          <ReactQuill
-            value={position_details}
-            name='positionDetails'
-            label='Description'
-            placeholder='Ruby on Rails job that...'
-            required
-            onChange={(value) => this.handleQuill(value, 'position_details')}
           />
           <br />
           <Form.Field>

@@ -1,36 +1,30 @@
 import React, { Fragment, } from 'react';
+import axios from 'axios';
 import GenerateHtml from '../GenerateHtml';
 import styled from 'styled-components';
 import { Link, } from 'react-router-dom';
 import { Button, Container, Header, Icon, Image, Segment, } from 'semantic-ui-react';
 
 class Company extends React.Component {
-  state = { company: null, };
+  state = { company: null, contacts: [], };
 
   componentDidMount() {
     this.setState({ company: this.props.companies.find( c => c.id === parseInt(this.props.match.params.id, 10)), });
+    axios.get(`/api/company/${this.props.match.params.id}/contacts`)
+      .then( res => {
+        this.setState({ contacts: res.data, });
+      })
+      .catch( err => {
+        console.log(err)
+      })
   };
 
-  displayAppliedInfo = (company) => {
-    if (company.applied) {
-      return (
-        <Fragment>
-          <Field>
-            <Header as='h5' style={{ marginBottom: 0, marginRight: '10px', }}>Position:</Header>
-            <p>{company.position}</p>
-          </Field>
-          <Header as='h5' style={{ marginBottom: 0, marginRight: '10px', }}>Position Details:</Header>
-          <Segment>
-            {
-              company.position_details ?
-                <GenerateHtml text={company.position_details} />
-                :
-                <p>No company details added...</p>
-            }
-          </Segment>
-        </Fragment>
-      );
-    };
+  renderContacts = () => {
+    if (this.state.contacts.length === 0)
+      return <h5>No Contacts Added</h5>;
+    return this.state.contacts.map( c => {
+      return <h5 key={c.id}>{ c.name }</h5>;
+    });
   };
 
   render() {
@@ -64,12 +58,7 @@ class Company extends React.Component {
         </Field>
         <Header as='h5'>Company Contacts:</Header>
         <Segment>
-          {
-            company.contacts ?
-              <GenerateHtml text={company.contacts} />
-              :
-              <p>No company contacts added...</p>
-          }
+          { this.renderContacts() }
         </Segment>
         <br />
         <Field>
@@ -82,8 +71,6 @@ class Company extends React.Component {
             }
           </p>
         </Field>
-        <br />
-        { this.displayAppliedInfo(company) }
         <br />
         <Button.Group icon>
           <Link to={`/companies/${company.id}/edit`}>
