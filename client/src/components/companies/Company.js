@@ -4,6 +4,7 @@ import GenerateHtml from '../GenerateHtml';
 import styled from 'styled-components';
 import PencilIcon from "../../images/pencil.svg"
 import TrashIcon from "../../images/trash.svg"
+import { AddButton } from "../../styles/shared";
 import { Link, } from 'react-router-dom';
 import { Button, Container, Header, Icon, Image, Segment, Table, } from 'semantic-ui-react';
 
@@ -99,7 +100,7 @@ class Company extends React.Component {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", }}>
           <Header as='h3' style={{ marginTop: "12px", }}>Company Contacts:</Header>
           <Link to={`/companies/${company.id}/contacts/new`}>
-            <NewButton>Add Contact</NewButton>
+            <AddButton>Add Contact</AddButton>
           </Link>
         </div>
         <Table celled padded striped>
@@ -151,24 +152,6 @@ const Field = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
-
-const NewButton = styled.button`
-  color: #fff !important;
-  background: #2ecc71;
-  border-color: transparent;
-  letter-spacing: .7px;
-  padding: 15px;
-  font-weight: 500;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.2s ease, border 0.2s ease;
-
-  &:hover {
-    background: #29b765;
-    transition: background 0.2s ease, border 0.2s ease;
-  }
 `;
 
 export default Company;

@@ -1,6 +1,6 @@
 import React from 'react';
-import GenerateHtml from '../GenerateHtml';
 import styled from 'styled-components';
+import { AddButton, } from "../../styles/shared";
 import { Link, } from 'react-router-dom';
 import { Button, Checkbox, Container, Header, Icon, Image, Table } from 'semantic-ui-react';
 
@@ -66,8 +66,8 @@ class Companies extends React.Component {
         />
       </Table.Cell>
       <Table.Cell>{c.location}</Table.Cell>
-      <Table.Cell width={8}>
-        <GenerateHtml text={c.description} />
+      <Table.Cell>
+        
       </Table.Cell>
     </Table.Row>
   );
@@ -95,10 +95,7 @@ class Companies extends React.Component {
             </SearchIconContainer>
           </SearchBar>
           <Link to='/companies/new'>
-            <Button color='blue'>
-              <Icon name='add' />
-              Add Company
-            </Button>
+            <AddButton>Add Company</AddButton>
           </Link>
         </div>
         <br />
@@ -115,7 +112,7 @@ class Companies extends React.Component {
                   <Table.HeaderCell>Title</Table.HeaderCell>
                   <Table.HeaderCell>Logo</Table.HeaderCell>
                   <Table.HeaderCell>Location</Table.HeaderCell>
-                  <Table.HeaderCell>Description</Table.HeaderCell>
+                  <Table.HeaderCell></Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
