@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
     #Contacts
     get "/company/:company_id/contacts", to: "contacts#index"
-    post "/company/:company_id/contacts/new", to: "contacts#create"
+    get "/contacts/:id", to: "contacts#single_contact"
+    post "/companies/:company_id/contacts", to: "contacts#create"
     put "/contacts/:id/edit", to: "contacts#update"
     delete "/contacts/:id", to: "contacts#destroy"
   end

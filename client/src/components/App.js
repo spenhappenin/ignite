@@ -1,11 +1,11 @@
 import React, { Component, } from 'react';
 import AuthRoute from './AuthRoute';
+import ContactForm from './ContactForm';
 import FetchCompanies from './companies/FetchCompanies';
 import FetchUser from './FetchUser';
 import Flash from './Flash';
 import RenderLanding from './root/RenderLanding';
 import Login from './Login';
-import NavBar from './NavBar';
 import NoMatch from './NoMatch';
 import ProtectedRoute from './ProtectedRoute';
 import Register from './Register';
@@ -18,13 +18,14 @@ class App extends Component {
     return (
       <div>
         <RenderNavbar />
-        {/* <NavBar /> */}
         <Flash />
         <FetchUser>
           <Switch>
             <Route exact path='/' component={RenderLanding} />
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />
+            <ProtectedRoute exact path="/companies/:company_id/contacts/new" component={ContactForm} />
+            <ProtectedRoute exact path="/companies/:company_id/contacts/:id" component={ContactForm} />
             <ProtectedRoute path='/companies' component={FetchCompanies} />
             <Route component={NoMatch} />
           </Switch>
