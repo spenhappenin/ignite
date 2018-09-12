@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AddButton, } from "../../styles/shared";
+import listIcon from "../../images/list.svg";
+import listIconHover from "../../images/list-hover.svg";
+import tableIcon from "../../images/table.svg";
+import tableIconHover from "../../images/table-hover.svg";
 import { Link, } from 'react-router-dom';
 import { Button, Checkbox, Container, Header, Icon, Image, Table } from 'semantic-ui-react';
 
 class Companies extends React.Component {
-  state = { applied: false, search: '', tableView: true, };
+  state = { applied: false, search: '', tableView: true, tableView: true, listView: false, };
 
   displayTableView = () => {
     let filteredCompanies = this.props.companies.filter( company => {
@@ -74,7 +78,13 @@ class Companies extends React.Component {
 
   toggleCheckbox = () => this.setState({ applied: !this.state.applied, });
 
-  toggleView = () => this.setState({ tableView: !this.state.tableView, });
+  toggleView = (viewType) => {
+    if (viewType === "table") {
+      this.setState({ tableView: true, listView: false, });
+    } else {
+      this.setState({ tableView: false, listView: true, });
+    };
+  };
 
   updateSearch = (e) => this.setState({ search: e.target.value.substr(0, 20), });
 
@@ -82,28 +92,45 @@ class Companies extends React.Component {
     return (
       <Container>
         <br />
-        <Header as='h1'>Companies</Header>
-        <div style={{ display: 'flex', }}>
-          <SearchBar>
-            <SearchInput
-              type='text' 
-              value={this.state.search}
-              onChange={this.updateSearch}
-            />
-            <SearchIconContainer>
-              <Icon name='search' size='large' color='grey' style={{ marginLeft: '3.5px', }} />
-            </SearchIconContainer>
-          </SearchBar>
-          <Link to='/companies/new'>
-            <AddButton>Add Company</AddButton>
-          </Link>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", }}>
+          <Header as='h1'>Companies</Header>
+          <div style={{ display: "flex", borderRadius: "3px", cursor: "pointer", }}>
+            <ListViewIconContainer darker={this.state.tableView} onClick={() => this.toggleView("table")}>
+              <img
+                src={this.state.tableView ? tableIcon : tableIconHover}
+                style={{ height: "25px", width: "25px", marginRight: "10px", }}
+              />
+            </ListViewIconContainer>
+            <ListViewIconContainer darker={this.state.listView} onClick={() => this.toggleView("list")}>
+              <img
+                src={this.state.tableView ? listIconHover : listIcon}
+                style={{ height: "25px", width: "25px", }}
+              />
+            </ListViewIconContainer>
+          </div>
         </div>
         <br />
-        <button onClick={this.toggleView} style={{ display: 'inline-block', padding: '10px', cursor: 'pointer', marginRight: '20px' }}>
-          { this.state.tableView ? "List View" : "Table View" }
-        </button>
-        <Checkbox onChange={this.toggleCheckbox} label='Show Applied' />
         <br />
+        <div style={{ display: 'flex', justifyContent: "space-between", }}>
+          <div style={{ display: "flex", alignItems: "center", }}>
+            <SearchBar>
+              <SearchInput
+                type='text' 
+                value={this.state.search}
+                onChange={this.updateSearch}
+              />
+              <SearchIconContainer>
+                <Icon name='search' size='large' color='grey' style={{ marginLeft: '3.5px', }} />
+              </SearchIconContainer>
+            </SearchBar>
+            <Checkbox onChange={this.toggleCheckbox} label='Show Applied' />
+          </div>
+          <div>
+            <Link to='/companies/new'>
+              <AddButton>Add Company</AddButton>
+            </Link>
+          </div>
+        </div>
         {
           this.state.tableView ? 
             <Table celled padded striped>
@@ -132,6 +159,20 @@ class Companies extends React.Component {
     );
   };
 };
+
+const ListViewIconContainer = styled.div`
+  background: ${ props => props.darker ? "#aec0d1" : "#e7f0f7"};
+  width: 80px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  transition: background 0.2s ease, border 0.2s ease;
+
+  &:hover {
+    background: #aec0d1;
+    transition: background 0.2s ease, border 0.2s ease;
+  }
+`;
 
 const SearchBar = styled.div`
   border: 1px solid #dededf;
