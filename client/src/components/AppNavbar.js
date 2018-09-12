@@ -6,7 +6,7 @@ import UserIcon from '../images/user-silhouette.svg';
 import { connect, } from 'react-redux';
 import { handleLogout, } from '../reducers/user';
 import { Menu, Popup, } from 'semantic-ui-react';
-import { Link, withRouter, } from 'react-router-dom';
+import { Link, NavLink, withRouter, } from 'react-router-dom';
 
 class AppNavbar extends React.Component {
 
@@ -53,18 +53,22 @@ class AppNavbar extends React.Component {
   render() {
     return (
       <StyledAppNavbar pointing secondary>
-        <Link to='/' style={{ display: 'flex', alignItems: 'center', marginRight: '30px', }}>
+        <StyledNavLink 
+          to='/' 
+          style={{ display: 'flex', alignItems: 'center', marginRight: '30px', }}
+          activeStyle={{ color: "white", }}
+        >
           <img src={Fire} style={{ height: '50px', }} />
-        </Link>
-        <Link to='/companies'>
-          <NavItem name='Companies' />
-        </Link>
-        <Link to='/companies'>
-          <NavItem name='Topics' />
-        </Link>
-        <Link to='/companies'>
-          <NavItem name='Statistics' />
-        </Link>
+        </StyledNavLink>
+        <StyledNavLink to='/companies' activeStyle={{ color: "white", }}>
+          Companies
+        </StyledNavLink>
+        <StyledNavLink to='/topics' activeStyle={{ color: "white", }}>
+          Topics
+        </StyledNavLink>
+        <StyledNavLink to='/statistics' activeStyle={{ color: "white", }}>
+          Statistics
+        </StyledNavLink>
         { this.rightNavs() }
       </StyledAppNavbar>
     );
@@ -74,6 +78,19 @@ class AppNavbar extends React.Component {
 const mapStateToProps = state => {
   return { user: state.user, };
 };
+
+const StyledNavLink = styled(NavLink)`
+  color: #8c939b;
+  font-family: 'Barlow', sans-serif !important;
+  letter-spacing: 1px;
+  font-size: 14px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+   &:hover {
+     color: white;
+   }
+`;
 
 const SignOut = styled.p`
   cursor: pointer;
@@ -103,7 +120,8 @@ const PopupItem = styled(Link)`
 `;
 
 const StyledAppNavbar = styled(Menu)`
-  background: #283149 !important; 
+  /* background: #283149 !important;  */
+  background: #22313f !important; 
   height: 70px;
   display: flex;
   align-items: center;
