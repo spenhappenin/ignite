@@ -7,12 +7,16 @@ Rails.application.routes.draw do
     put '/companies/:id/edit', to: 'companies#update'
     delete '/companies/:id', to: 'companies#destroy'
 
-    #Contacts
+    # Contacts
     get "/company/:company_id/contacts", to: "contacts#index"
     get "/contacts/:id", to: "contacts#single_contact"
     post "/companies/:company_id/contacts", to: "contacts#create"
     put "/contacts/:id/edit", to: "contacts#update"
     delete "/contacts/:id", to: "contacts#destroy"
+
+    # Settings
+    get "/settings/profile", to: "users#fetch_profile"
+    put "/settings/profile", to: "users#update_profile"
   end
 
   #Do not place any routes below this one

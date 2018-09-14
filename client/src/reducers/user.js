@@ -1,16 +1,21 @@
 import React from 'react';
 import axios from 'axios';
 import { setFlash } from './flash';
-const LOGIN = 'LOGIN';
-const LOGOUT = 'LOGOUT';
+const LOGIN = "LOGIN";
+const LOGOUT = "LOGOUT";
+const UPDATE_PROFILE = "UPDATE_PROFILE"
 
 export const login = (user) => {
   return { type: LOGIN, user };
-}
+};
 
 const logout = () => {
   return { type: LOGOUT };
-}
+};
+
+const updateProfile = (user) => {
+  return { type: UPDATE_PROFILE, user, };
+};
 
 export const registerUser = (user, history) => {
   return (dispatch) => {
@@ -69,13 +74,24 @@ export const handleLogin = (user, history) => {
   };
 };
 
+export const updateUserProfile = (user) => {
+  return (dispatch) => {
+    axios.put("/api/settings/profile", { ...user, })
+      .then( res => {
+        dispatch(updateProfile(res.data));
+      })
+  };
+};
+
 export default (state = {}, action) => {
   switch (action.type) {
     case LOGIN:
-    return action.user;
+      return action.user;
     case LOGOUT:
-    return {};
+      return {};
+    case UPDATE_PROFILE:
+      return action.user
     default:
-    return state;
-  }
+      return state;
+  };
 };

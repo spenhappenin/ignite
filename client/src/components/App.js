@@ -10,6 +10,7 @@ import NoMatch from './NoMatch';
 import ProtectedRoute from './ProtectedRoute';
 import Register from './Register';
 import RenderNavbar from './RenderNavbar';
+import Settings from "./Settings";
 import { Route, Switch, } from 'react-router-dom';
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
             <ProtectedRoute exact path="/companies/:company_id/contacts/new" component={ContactForm} />
             <ProtectedRoute exact path="/companies/:company_id/contacts/:id" component={ContactForm} />
             <ProtectedRoute path='/companies' component={FetchCompanies} />
+            <ProtectedRoute exact path="/settings" component={Settings} />
             <Route component={NoMatch} />
           </Switch>
         </FetchUser>

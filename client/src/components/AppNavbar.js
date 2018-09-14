@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import Fire from '../images/fire.svg';
+import trophyColor from '../images/trophy-color.svg';
+import trophyColor2 from '../images/trophy-color2.svg';
+import trophyColor3 from '../images/trophy-color3.svg';
+import trophyWhite from '../images/trophy-white.svg';
+import trophyWhite2 from '../images/trophy-white2.svg';
 import SettingsIcon from '../images/gear-option.svg';
 import UserIcon from '../images/user-silhouette.svg';
+import fireWhite from '../images/white-fire-logo.svg';
 import { connect, } from 'react-redux';
 import { handleLogout, } from '../reducers/user';
 import { Menu, Popup, } from 'semantic-ui-react';
@@ -34,31 +40,35 @@ class AppNavbar extends React.Component {
     };
   };
 
-  popupContent = () => (
-    <div style={{ width: '200px', }}>
-      <div style={{ marginBottom: '20px', }}>
-        <h3 style={{ marginBottom: 0, }}>{ this.props.user.name ? this.props.user.name : 'No Name Added' }</h3>
-        <p style={{ color: '#636363', }}>{ this.props.user.email }</p>
+  popupContent = () => {
+    const { user: { email, first_name, last_name, }, } = this.props;
+    return (
+      <div style={{ width: '200px', }}>
+        <div style={{ marginBottom: '20px', }}>
+          <h3 style={{ marginBottom: 0, }}>{ first_name && last_name ? `${first_name} ${last_name}` : 'No Name Added' }</h3>
+          <p style={{ color: '#636363', }}>{ email }</p>
+        </div>
+        <hr />
+        <div>
+          <PopupItem to='/settings'>
+            <p>Settings</p>
+          </PopupItem>
+          <SignOut onClick={() => this.props.dispatch(handleLogout(this.props.history))}>Sign Out</SignOut>
+        </div>
       </div>
-      <hr />
-      <div>
-        <PopupItem to='/'>
-          <p>Settings</p>
-        </PopupItem>
-        <SignOut onClick={() => this.props.dispatch(handleLogout(this.props.history))}>Sign Out</SignOut>
-      </div>
-    </div>
-  );
+    )
+  };
 
   render() {
     return (
       <StyledAppNavbar pointing secondary>
         <StyledNavLink 
           to='/' 
-          style={{ display: 'flex', alignItems: 'center', marginRight: '30px', }}
+          style={{ display: 'flex', alignItems: 'center', marginRight: '10px', }}
           activeStyle={{ color: "white", }}
         >
-          <img src={Fire} style={{ height: '50px', }} />
+          <img src={trophyWhite2} style={{ height: '60px', }} />
+          {/* <img src={trophyColor2} style={{ height: '60px', }} /> */}
         </StyledNavLink>
         <StyledNavLink to='/companies' activeStyle={{ color: "white", }}>
           Companies
