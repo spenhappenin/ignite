@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: 'api/auth'
+  mount_devise_token_auth_for "User", at: "api/auth"
+
   namespace :api do
+
     # Companies
-    get '/companies', to: 'companies#my_companies'
-    post '/companies/new', to: 'companies#create'
-    put '/companies/:id/edit', to: 'companies#update'
-    delete '/companies/:id', to: 'companies#destroy'
+    get "/companies", to: "companies#my_companies"
+    post "/companies/new", to: "companies#create"
+    put "/companies/:id/edit", to: "companies#update"
+    delete "/companies/:id", to: "companies#destroy"
 
     # Contacts
     get "/company/:company_id/contacts", to: "contacts#index"
@@ -17,8 +19,15 @@ Rails.application.routes.draw do
     # Settings
     get "/settings/profile", to: "users#fetch_profile"
     put "/settings/profile", to: "users#update_profile"
+
+    # Applications
+    get "/applications", to: "applications#index"
+    post "/applications/:id", to: "applications#create"
+    put "/applications/:id", to: "applications#update"
+    delete "/applications/:id", to: "applications#destroy"
+
   end
 
   #Do not place any routes below this one
-  get '*other', to: 'static#index'
+  get "*other", to: "static#index"
 end

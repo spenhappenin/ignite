@@ -73,8 +73,8 @@ class AppNavbar extends React.Component {
         <StyledNavLink to='/companies' activeStyle={{ color: "white", }}>
           Companies
         </StyledNavLink>
-        <StyledNavLink to='/topics' activeStyle={{ color: "white", }}>
-          Topics
+        <StyledNavLink to='/applications' activeStyle={{ color: "white", }}>
+          Applications
         </StyledNavLink>
         <StyledNavLink to='/statistics' activeStyle={{ color: "white", }}>
           Statistics
