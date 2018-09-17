@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { Header, Form, Button, Segment } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { registerUser } from '../reducers/user';
-import { setFlash } from '../reducers/flash';
+import React, { Component, } from 'react';
+import styled from "styled-components";
+import { connect, } from 'react-redux';
+import { registerUser, } from '../reducers/user';
+import { setFlash, } from '../reducers/flash';
+import { Container, Header, Form, Button, Segment, } from 'semantic-ui-react';
 
 class Register extends Component {
   state = { email: '', password: '', passwordConfirmation: '' };
@@ -25,48 +26,63 @@ class Register extends Component {
     const { email, password, passwordConfirmation } = this.state;
 
     return (
-      <Segment basic>
-        <Header as='h1' textAlign='center'>Register Component</Header>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Field>
-            <label htmlFor='email'>Email</label>
-            <input
-              id='email'
-              placeholder='Email'
-              required
-              value={email}
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor='password'>Password</label>
-            <input
-              id='password'
-              placeholder='Password'
-              type='password'
-              required
-              value={password}
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor='passwordConfirmation'>Password Confirmation</label>
-            <input
-              id='passwordConfirmation'
-              placeholder='Password Confirmation'
-              type='password'
-              required
-              value={passwordConfirmation}
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Segment basic textAlign='center'>
-            <Button type='submit'>Submit</Button>
-          </Segment>
-        </Form>
-      </Segment>
+      <Container>
+        <br />
+        <br />
+        <br />
+        <br />
+        <RegisterContainer>
+          <Header as='h1' textAlign='center'>Register Component</Header>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Field>
+              <label htmlFor='email'>Email</label>
+              <input
+                id='email'
+                placeholder='Email'
+                required
+                value={email}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label htmlFor='password'>Password</label>
+              <input
+                id='password'
+                placeholder='Password'
+                type='password'
+                required
+                value={password}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label htmlFor='passwordConfirmation'>Password Confirmation</label>
+              <input
+                id='passwordConfirmation'
+                placeholder='Password Confirmation'
+                type='password'
+                required
+                value={passwordConfirmation}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Segment basic textAlign='center'>
+              <Button type='submit'>Submit</Button>
+            </Segment>
+          </Form>
+        </RegisterContainer>
+      </Container>
     );
-  }
-}
+  };
+};
+
+const RegisterContainer = styled.div`
+  background: white;
+  padding: 30px;
+  border-radius: 5px;
+  -webkit-box-shadow: 3px 3px 3px -3px #999, 3px 3px 3px -3px #999, -3px 3px 3px -3px #999;
+  -moz-box-shadow: 3px 3px 3px -3px #999, 3px 3px 3px -3px #999, -3px 3px 3px -3px #999;
+  box-shadow: 3px 3px 3px -3px #999, 3px 3px 3px -3px #999, -3px 3px 3px -3px #999;
+`;
 
 export default connect()(Register);
