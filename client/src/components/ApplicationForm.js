@@ -112,7 +112,7 @@ class ApplicationForm extends Component {
 
 const FormContainer = styled.div`
   background: white;
-  padding: 100px;
+  padding: 50px 100px 50px 100px;
   border-radius: 5px;
   -webkit-box-shadow: 3px 3px 3px -3px #999, 3px 3px 3px -3px #999, -3px 3px 3px -3px #999;
   -moz-box-shadow: 3px 3px 3px -3px #999, 3px 3px 3px -3px #999, -3px 3px 3px -3px #999;
