@@ -17,21 +17,23 @@ class Applications extends Component {
 
   renderApplications = () => {
     return this.state.applications.map( a => (
-      <Card>
-        <LogoContainer>
-          <CompanyLogo src={a.company_image} />
-        </LogoContainer>
-        <ContentContainer>
-          <div>
-            <MainText>{a.position}</MainText>
-            <SubText>{a.company_title}</SubText>
-            <SubText location>{a.company_location}</SubText>
-          </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            { this.renderIcon(a.overall_status) }
-          </div>
-        </ContentContainer>
-      </Card>
+      <Link to={`/applications/${a.id}`}>
+        <Card>
+          <LogoWrapper>
+            <CompanyLogo src={a.company_image} />
+          </LogoWrapper>
+          <ContentWrapper>
+            <div>
+              <MainText>{a.position}</MainText>
+              <SubText>{a.company_title}</SubText>
+              <SubText location>{a.company_location}</SubText>
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              { this.renderIcon(a.overall_status) }
+            </div>
+          </ContentWrapper>
+        </Card>
+      </Link>
     ));
   };
 
@@ -85,7 +87,7 @@ const Card = styled.div`
     transition: background 0.2s ease;
   }
 `;
-  const LogoContainer = styled.div`
+  const LogoWrapper = styled.div`
     display: flex;
     width: 79px;
   `;
@@ -97,7 +99,7 @@ const Card = styled.div`
       background-position: center;
       background-repeat: no-repeat;
     `;
-  const ContentContainer = styled.div`
+  const ContentWrapper = styled.div`
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -114,8 +116,8 @@ const MainText = styled.p`
 `;
 
 const SubText = styled.p`
-  font-size: 12px;
-  font-wight: ${ props => props.location ? "none" : 400};
+  font-size: ${ props => props.location ? "12px" : "14px" };
+  font-weight: ${ props => props.location ? 100 : 400};
   color: #777777;
   margin-bottom: 0;
 `;
