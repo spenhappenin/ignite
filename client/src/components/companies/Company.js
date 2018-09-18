@@ -1,4 +1,4 @@
-import React, { Fragment, } from 'react';
+import React from 'react';
 import axios from 'axios';
 import GenerateHtml from '../GenerateHtml';
 import styled from 'styled-components';
@@ -53,9 +53,10 @@ class Company extends React.Component {
             }}
           >
             <Link to={`/companies/${this.state.company.id}/contacts/${c.id}`} style={{ marginBottom: "10px" }}>
-              <img src={PencilIcon} style={{ height: "25px", width: "25px", }} />
+              <img src={PencilIcon} style={{ height: "25px", width: "25px", }} alt={c.image} />
             </Link>
             <img 
+              alt={c.image}
               onClick={() => this.handleDelete(c.id)} 
               src={TrashIcon} 
               style={{ height: "25px", width: "25px", cursor: "pointer", }} 

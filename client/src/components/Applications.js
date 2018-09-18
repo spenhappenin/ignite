@@ -39,14 +39,14 @@ class Applications extends Component {
 
   renderIcon = (status) => {
     switch(status) {
-      case "pending":
-        return <Icon name="clock outline" color="orange" size="big" />
       case "action":
         return <Icon name="building" color="blue" size="big" />
       case "denied":
         return <Icon name="ban" color="red" size="big" />
       case "approved":
         return <Icon name="check circle" color="green" size="big" />
+      default:
+        return <Icon name="clock outline" color="orange" size="big" />
     }
   };
 

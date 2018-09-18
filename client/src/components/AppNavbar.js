@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Fire from '../images/fire.svg';
 import trophyColor from '../images/trophy-color.svg';
 import trophyColor2 from '../images/trophy-color2.svg';
 import trophyColor3 from '../images/trophy-color3.svg';
@@ -17,17 +16,16 @@ import { Link, NavLink, withRouter, } from 'react-router-dom';
 class AppNavbar extends React.Component {
 
   rightNavs = () => {
-    const { user, dispatch, history } = this.props;
+    const { user, } = this.props;
 
     if (user.id) {
       return (
         <Menu.Menu position='right' style={{ display: 'flex', alignItems: 'center' }}>
           <SettingsIconContainer src={SettingsIcon} />
-          {/* <UserIconContainer onClick={() => dispatch(handleLogout(history))}> */}
           <Popup 
             trigger={
               <UserIconContainer>
-                <img src={UserIcon} style={{ height: '22px', width: '22px', }} />
+                <img src={UserIcon} style={{ height: '22px', width: '22px', }} alt="settings" />
               </UserIconContainer>
             }
             content={this.popupContent}
@@ -67,7 +65,7 @@ class AppNavbar extends React.Component {
           style={{ display: 'flex', alignItems: 'center', marginRight: '10px', }}
           activeStyle={{ color: "white", }}
         >
-          <img src={trophyWhite2} style={{ height: '60px', }} />
+          <img src={trophyWhite2} style={{ height: '60px', }} alt="logo" />
           {/* <img src={trophyColor2} style={{ height: '60px', }} /> */}
         </StyledNavLink>
         <StyledNavLink to='/companies' activeStyle={{ color: "white", }}>
@@ -136,13 +134,6 @@ const StyledAppNavbar = styled(Menu)`
   display: flex;
   align-items: center;
   padding: 10px 40px 10px 40px;
-`;
-
-const NavItem = styled(Menu.Item)`
-  color: white !important;
-  font-family: 'Barlow', sans-serif !important;
-  letter-spacing: 1px;
-  font-size: 14px;
 `;
 
 const SettingsIconContainer = styled.img`

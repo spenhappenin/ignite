@@ -1,8 +1,6 @@
 import React from 'react';
 import Particles from 'react-particles-js';
 import styled from 'styled-components';
-import Fire from '../../images/fire.svg';
-import { Header, } from 'semantic-ui-react';
 
 class Home extends React.Component {
   render() {
@@ -18,7 +16,6 @@ class Home extends React.Component {
 };
 
 const CanvasContainer = styled.div`
-  /* position: relative; */
 `;
 
 const HomeContainer = styled.div`
@@ -34,16 +31,6 @@ const ParticlesContainer = styled(Particles)`
   margin-top: -100px;
   width: 100%;
   height: 100%;
-  /* z-index: 1 !important; */
-  /* pointer-events: none; */
-
-`;
-
-const FireContainer = styled.img`
-  z-index: 999;
-  width: 100%;
-  height: 250px;
-  position: absolute;
 `;
 
 const settings = {

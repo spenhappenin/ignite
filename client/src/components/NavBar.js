@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Fire from '../images/fire.svg';
 import { connect, } from 'react-redux';
 import { handleLogout, } from '../reducers/user';
-import { Button, Menu, } from 'semantic-ui-react';
+import { Menu, } from 'semantic-ui-react';
 import { Link, NavLink, withRouter, } from 'react-router-dom';
 
 class NavBar extends React.Component {
@@ -47,7 +47,7 @@ class NavBar extends React.Component {
     return (
       <WebNavbar pointing secondary>
         <Link to='/' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
-          <img src={Fire} style={{ height: '60px', }} />
+          <img src={Fire} style={{ height: '60px', }} alt="logo" />
           <Logo name='IGNITE' />
         </Link>
         { this.rightNavs() }

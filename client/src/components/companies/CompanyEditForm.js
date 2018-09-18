@@ -25,7 +25,7 @@ class CompanyEditForm extends React.Component {
 
     if (this.state.setFormData !== true) {
       this.setState({ applied, description, image, location, position, position_details, title, setFormData: true, });
-    }
+    };
   };
 
   handleChange = (e) => this.setState({ [e.target.name]: e.target.value, });
@@ -53,7 +53,7 @@ class CompanyEditForm extends React.Component {
   };
 
   render() {
-    const { applied, description, image, location, position, position_details, title, } = this.state;
+    const { applied, description, image, location, title, } = this.state;
 
     return (
       <Container>

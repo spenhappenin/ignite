@@ -6,10 +6,10 @@ import listIconHover from "../../images/list-hover.svg";
 import tableIcon from "../../images/table.svg";
 import tableIconHover from "../../images/table-hover.svg";
 import { Link, } from 'react-router-dom';
-import { Button, Checkbox, Container, Header, Icon, Image, Table } from 'semantic-ui-react';
+import { Checkbox, Container, Header, Icon, Image, Table } from 'semantic-ui-react';
 
 class Companies extends React.Component {
-  state = { applied: false, search: '', tableView: true, tableView: true, listView: false, };
+  state = { applied: false, search: '', tableView: true, listView: false, };
 
   displayTableView = () => {
     let filteredCompanies = this.props.companies.filter( company => {
@@ -97,12 +97,14 @@ class Companies extends React.Component {
           <div style={{ display: "flex", borderRadius: "3px", cursor: "pointer", }}>
             <ListViewIconContainer darker={this.state.tableView} onClick={() => this.toggleView("table")}>
               <img
+                alt="table-icon"
                 src={this.state.tableView ? tableIcon : tableIconHover}
                 style={{ height: "25px", width: "25px", marginRight: "10px", }}
               />
             </ListViewIconContainer>
             <ListViewIconContainer darker={this.state.listView} onClick={() => this.toggleView("list")}>
               <img
+                alt="list-icon"
                 src={this.state.tableView ? listIconHover : listIcon}
                 style={{ height: "25px", width: "25px", }}
               />

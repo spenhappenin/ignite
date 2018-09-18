@@ -37,7 +37,7 @@ class ApplicationForm extends Component {
   toggleCheckbox = () => this.setState({ reference: !this.state.reference, });
 
   render() {
-    const { position, company_id, sent_date, reference, source, notes, } = this.state;
+    const { position, company_id, sent_date, source, notes, } = this.state;
 
     return (
       <Container>
@@ -98,7 +98,6 @@ class ApplicationForm extends Component {
               label="Reference Submitted"
               name="reference"
               onChange={this.toggleCheckbox}
-              value={reference}
             />
             <SubmitButton type="submit">
               Add Application
