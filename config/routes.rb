@@ -22,7 +22,8 @@ Rails.application.routes.draw do
 
     # Applications
     get "/applications", to: "applications#index"
-    post "/applications/:id", to: "applications#create"
+    get "/applications/:id", to: "applications#show"
+    post "/applications", to: "applications#create"
     put "/applications/:id", to: "applications#update"
     delete "/applications/:id", to: "applications#destroy"
 

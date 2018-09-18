@@ -1,5 +1,6 @@
 import React, { Component, } from 'react';
 import Applications from "./Applications";
+import ApplicationForm from "./ApplicationForm";
 import AuthRoute from './AuthRoute';
 import ContactForm from './ContactForm';
 import FetchCompanies from './companies/FetchCompanies';
@@ -27,6 +28,7 @@ class App extends Component {
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />
             <ProtectedRoute exact path="/applications" component={Applications} />
+            <ProtectedRoute exact path="/applications/new" component={ApplicationForm} />
             <ProtectedRoute exact path="/companies/:company_id/contacts/new" component={ContactForm} />
             <ProtectedRoute exact path="/companies/:company_id/contacts/:id" component={ContactForm} />
             <ProtectedRoute path='/companies' component={FetchCompanies} />

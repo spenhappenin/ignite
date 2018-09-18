@@ -16,4 +16,8 @@ export const AddButton = styled.button`
     background: #29b765;
     transition: background 0.2s ease, border 0.2s ease;
   }
+
+  &:focus {
+    outline: 0;
+  }
 `;
