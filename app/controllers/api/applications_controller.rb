@@ -7,7 +7,8 @@ class Api::ApplicationsController < ApplicationController
   end
 
   def show 
-    render json: @application
+    application = Application.get_single_application(params[:id])
+    render json: application[0]
   end
 
   def create
