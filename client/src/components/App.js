@@ -30,6 +30,7 @@ class App extends Component {
             <AuthRoute exact path='/register' component={Register} />
             <ProtectedRoute exact path="/applications" component={Applications} />
             <ProtectedRoute exact path="/applications/new" component={ApplicationForm} />
+            <ProtectedRoute exact path="/applications/edit/:id" component={ApplicationForm} />
             <ProtectedRoute exact path="/applications/:id" component={Application} />
             <ProtectedRoute exact path="/companies/:company_id/contacts/new" component={ContactForm} />
             <ProtectedRoute exact path="/companies/:company_id/contacts/:id" component={ContactForm} />

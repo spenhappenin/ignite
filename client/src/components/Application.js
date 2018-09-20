@@ -1,6 +1,7 @@
 import React, { Component, Fragment, } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { Link, } from "react-router-dom";
 import { AddButton, } from "../styles/shared";
 import { Accordion, Container, Header, Icon, Segment, } from "semantic-ui-react";
 
@@ -52,12 +53,16 @@ class Application extends Component {
     if (this.state.application !== null) {
       const { 
         application: { 
-          position, notes, company_title, company_image, company_location, overall_status, reference, sent_date, source, 
+          id, position, notes, company_title, company_image, company_location, overall_status, reference, sent_date, source, 
         },
       } = this.state;
       return (
         <Container>
           <br />
+          <Link to={`/applications/edit/${id}`}>
+            <button>Edit</button>
+          </Link>
+          <button>Delete</button>
           <div style={{ display: "flex", alignItems: "center", }}>
             <CompanyLogo alt='company-logo' src={company_image} />
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>

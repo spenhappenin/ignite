@@ -15,6 +15,14 @@ class ApplicationForm extends Component {
   };
 
   componentDidMount() {
+    const { match: { params: { id, }, }, } = this.props;
+    if (id)
+      axios.get(`/api/applications/${id}`)
+        .then( res => {
+          const { position, sent_date, reference, source, notes, company_id, } = res.data;
+          this.setState({ position, sent_date, reference, source, notes, company_id, });
+        })
+
     axios.get('/api/companies')
       .then( res => {
         let options = res.data.map( c => {
@@ -27,23 +35,31 @@ class ApplicationForm extends Component {
   handleChange = (e, { name, value }) => this.setState({ [name]: value, });
 
   handleSubmit = (e) => {
+    const { id, } = this.props.match.params;
     e.preventDefault();
-    axios.post("/api/applications", { application: { ...this.state, } })
-      .then( res => {
-        this.props.history.push("/applications");
-      })
+    if (id) {
+      axios.put(`/api/applications/${id}`, { ...this.state })
+        .then( res => {
+          this.props.history.goBack();
+        })
+    } else {
+      axios.post("/api/applications", { application: { ...this.state, } })
+        .then( res => {
+          this.props.history.push("/applications");
+        })
+    }
   };
 
   toggleCheckbox = () => this.setState({ reference: !this.state.reference, });
 
   render() {
     const { position, company_id, sent_date, source, notes, } = this.state;
-
+    const { match: { params: { id, }, }, } = this.props;
     return (
       <Container>
         <br />
         <FormContainer>
-          <Header as="h1">New Application</Header>
+          <Header as="h1">{ id ? "Edit Application" : "New Application" }</Header>
           <br />
           <Form onSubmit={this.handleSubmit}>
             <Form.Group widths='equal'>
@@ -56,6 +72,7 @@ class ApplicationForm extends Component {
                 value={position}
               />
               <Form.Field 
+                disabled={id}
                 control={Select}
                 label="COMPANY"
                 name="company_id"
