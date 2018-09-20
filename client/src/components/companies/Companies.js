@@ -139,8 +139,8 @@ class Companies extends React.Component {
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>Title</Table.HeaderCell>
-                  <Table.HeaderCell>Logo</Table.HeaderCell>
-                  <Table.HeaderCell>Location</Table.HeaderCell>
+                  <Table.HeaderCell width={1}>Logo</Table.HeaderCell>
+                  <Table.HeaderCell width={3}>Location</Table.HeaderCell>
                   <Table.HeaderCell></Table.HeaderCell>
                 </Table.Row>
               </Table.Header>

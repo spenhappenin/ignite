@@ -1,10 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import trophyColor from '../images/trophy-color.svg';
-import trophyColor2 from '../images/trophy-color2.svg';
-import trophyColor3 from '../images/trophy-color3.svg';
-import trophyWhite from '../images/trophy-white.svg';
-import trophyWhite2 from '../images/trophy-white2.svg';
+import colorLogoTilted from '../images/tilt-color-logo.svg';
 import SettingsIcon from '../images/gear-option.svg';
 import UserIcon from '../images/user-silhouette.svg';
 import fireWhite from '../images/white-fire-logo.svg';
@@ -65,7 +61,7 @@ class AppNavbar extends React.Component {
           style={{ display: 'flex', alignItems: 'center', marginRight: '10px', }}
           activeStyle={{ color: "white", }}
         >
-          <img src={trophyWhite2} style={{ height: '60px', }} alt="logo" />
+          <img src={colorLogoTilted} style={{ height: '60px', }} alt="logo" />
           {/* <img src={trophyColor2} style={{ height: '60px', }} /> */}
         </StyledNavLink>
         <StyledNavLink to='/companies' activeStyle={{ color: "white", }}>
@@ -132,7 +128,7 @@ const StyledAppNavbar = styled(Menu)`
   background: #22313f !important; 
   height: 70px;
   display: flex;
-  align-items: center;
+  align-items: center !important;
   padding: 10px 40px 10px 40px;
 `;
 

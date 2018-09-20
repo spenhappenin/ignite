@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Fire from '../images/fire.svg';
+// import colorLogo from '../images/color-logo.svg';
+// import colorLogo from '../images/ignite-logo-full.svg';
+import colorLogo from '../images/ignite-logo-full-tilt.svg';
 import { connect, } from 'react-redux';
 import { handleLogout, } from '../reducers/user';
 import { Menu, } from 'semantic-ui-react';
@@ -47,8 +49,8 @@ class NavBar extends React.Component {
     return (
       <WebNavbar pointing secondary>
         <Link to='/' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
-          <img src={Fire} style={{ height: '60px', }} alt="logo" />
-          <Logo name='IGNITE' />
+          <img src={colorLogo} style={{ height: '90px', marginTop: "10px" }} alt="logo" />
+          {/* <Logo name='IGNITE' /> */}
         </Link>
         { this.rightNavs() }
       </WebNavbar>
@@ -88,7 +90,8 @@ const WebNavbar = styled(Menu)`
   display: flex;
   align-items: center;
   margin-bottom: 0 !important;
-  padding: 50px 100px 50px 100px;
+  padding: 0 100px 0 100px;
+  margin-top: 25px !important;
 `;
 
 const NavItem = styled(Menu.Item)`
