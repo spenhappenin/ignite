@@ -6,7 +6,7 @@ import listIconHover from "../../images/list-hover.svg";
 import tableIcon from "../../images/table.svg";
 import tableIconHover from "../../images/table-hover.svg";
 import { Link, } from 'react-router-dom';
-import { Checkbox, Container, Header, Icon, Image, Table } from 'semantic-ui-react';
+import { Checkbox, Container, Header, Icon, Image, Table, } from 'semantic-ui-react';
 
 class Companies extends React.Component {
   state = { applied: false, search: '', tableView: true, listView: false, };
@@ -182,6 +182,7 @@ const SearchBar = styled.div`
   align-items: center;
   margin-right: 20px;
   padding: 10px;
+  background: white;
 `;
 
 const SearchInput = styled.input`

@@ -2,19 +2,11 @@ import React, { Component, Fragment, } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { Link, } from "react-router-dom";
-import { AddButton, } from "../styles/shared";
+import { AddButton, UpdateButton, DeleteButton, } from "../styles/shared";
 import { Accordion, Container, Header, Icon, Segment, } from "semantic-ui-react";
 
 class Application extends Component {
-  state = { 
-    application: null, 
-    steps: [
-      { title: "Interview 1: Phone Interview", body: "Some text goes here..." },
-      { title: "Assessment 1", body: "Some text goes here..." },
-      { title: "Interview 2: Onsite Interview", body: "Some text goes here..." }
-    ], 
-    activeIndex: null
-  };
+  state = { application: null, steps: [], activeIndex: null, };
 
   componentDidMount() {
     // this.setState({ activeIndex: this.state.steps.length - 1, });
@@ -22,15 +14,26 @@ class Application extends Component {
       .then( res => {
         this.setState({ application: res.data, });
       })
+    axios.get(`/api/applications/${this.props.match.params.id}/steps`)
+      .then( res => {
+        this.setState({ steps: res.data, });
+      })
   };
 
   handleClick = (e, titleProps) => {
     const { index } = titleProps
     const { activeIndex } = this.state
     const newIndex = activeIndex === index ? -1 : index
-
     this.setState({ activeIndex: newIndex })
-  }
+  };
+
+  handleDelete = () => {
+    const { id, } = this.state.application;
+    axios.delete(`/api/applications/${id}`)
+      .then( res => {
+        this.props.history.push("/applications")
+      })
+  };
 
   renderSteps = () => {
     const { steps, activeIndex, } = this.state;
@@ -43,7 +46,7 @@ class Application extends Component {
           <h2 style={{ marginTop: 0, }}>{s.title}</h2>
         </AccordionTitle>
         <AccordionContent active={activeIndex === i}>
-          <p>{s.body}</p>
+          <p>{s.notes}</p>
         </AccordionContent>
       </Fragment>
     ));
@@ -60,9 +63,9 @@ class Application extends Component {
         <Container>
           <br />
           <Link to={`/applications/edit/${id}`}>
-            <button>Edit</button>
+            <UpdateButton>Edit Application</UpdateButton>
           </Link>
-          <button>Delete</button>
+          <DeleteButton onClick={this.handleDelete}>Delete Application</DeleteButton>
           <div style={{ display: "flex", alignItems: "center", }}>
             <CompanyLogo alt='company-logo' src={company_image} />
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
@@ -83,7 +86,9 @@ class Application extends Component {
           <br />
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <h2 style={{ marginBottom: 0, }}>Application Progress</h2>
-            <AddButton>Add Action</AddButton>
+            <Link to={`/applications/${this.props.match.params.id}/steps/new`}>
+              <AddButton>Add Step</AddButton>
+            </Link>
           </div>
           <hr />
           <Accordion styled fluid>

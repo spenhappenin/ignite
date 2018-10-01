@@ -11,9 +11,7 @@ class CompanyForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value, });
   };
 
-  handleQuill = (value, name) => {
-    this.setState({ [name]: value });
-  };
+  handleQuill = (value, name) => this.setState({ [name]: value });
 
   toggleCheckbox = () => this.setState({ applied: !this.state.applied, });
 

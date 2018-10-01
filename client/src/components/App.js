@@ -14,6 +14,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Register from './Register';
 import RenderNavbar from './RenderNavbar';
 import Settings from "./Settings";
+import StepForm from "./steps/StepForm";
 import { Route, Switch, } from 'react-router-dom';
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
             <ProtectedRoute exact path="/applications/new" component={ApplicationForm} />
             <ProtectedRoute exact path="/applications/edit/:id" component={ApplicationForm} />
             <ProtectedRoute exact path="/applications/:id" component={Application} />
+            <ProtectedRoute path='/applications/:id/steps/new' component={StepForm} />
             <ProtectedRoute exact path="/companies/:company_id/contacts/new" component={ContactForm} />
             <ProtectedRoute exact path="/companies/:company_id/contacts/:id" component={ContactForm} />
             <ProtectedRoute path='/companies' component={FetchCompanies} />

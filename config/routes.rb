@@ -27,6 +27,13 @@ Rails.application.routes.draw do
     put "/applications/:id", to: "applications#update"
     delete "/applications/:id", to: "applications#destroy"
 
+    # Steps
+    get "applications/:application_id/steps", to: "steps#index"
+    get "applications/:application_id/steps/:id", to: "steps#show"
+    post "applications/:application_id/steps", to: "steps#create"
+    put "applications/:application_id/steps/:id", to: "steps#update"
+    delete "applications/:application_id/steps/:id", to: "steps#destroy"
+
   end
 
   #Do not place any routes below this one

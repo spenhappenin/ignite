@@ -1,6 +1,7 @@
 class Application < ApplicationRecord
   belongs_to :user
   belongs_to :company
+  has_many :steps
 
   def self.get_applications(user)
     select("applications.id, applications.position, sent_date, reference, overall_status, source, companies.title AS company_title, companies.image AS company_image, companies.location AS company_location")
