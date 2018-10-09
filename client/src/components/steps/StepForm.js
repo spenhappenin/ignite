@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Checkbox, Container, Form, Header, Input, Select, TextArea, } from "semantic-ui-react";
 
 class StepForm extends Component {
-  state = { title: "", notes: "", complete: false, type_of: "", due_date: "", };
+  state = { title: "", notes: "", complete: false, type_of: "", due_date: "", due_time: "", };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value, });
 
@@ -19,7 +19,7 @@ class StepForm extends Component {
   toggleCheckbox = () => this.setState({ complete: !this.state.complete, });
 
   render() {
-    const { title, notes, complete, type_of, due_date, } = this.state;
+    const { title, notes, complete, type_of, due_date, due_time } = this.state;
   
     return (
       <Container>
@@ -56,6 +56,15 @@ class StepForm extends Component {
                 placeholder="Due Date"
                 type="date"
                 value={due_date}
+              />
+              <Form.Field 
+                control={Input}
+                label="TIME"
+                name="due_time"
+                onChange={this.handleChange}
+                placeholder="Due Time"
+                type="time"
+                value={due_time}
               />
             </Form.Group>
             <Form.Group widths="equal">

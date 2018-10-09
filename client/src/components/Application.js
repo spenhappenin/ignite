@@ -1,12 +1,20 @@
 import React, { Component, Fragment, } from "react";
 import axios from "axios";
+import moment from "moment";
+import pencilIcon from "../images/pencil.svg"
 import styled from "styled-components";
+import trashIcon from "../images/trash.svg"
 import { Link, } from "react-router-dom";
 import { AddButton, UpdateButton, DeleteButton, } from "../styles/shared";
-import { Accordion, Container, Header, Icon, Segment, } from "semantic-ui-react";
+import { Accordion, Container, Header, Icon, Dropdown, Segment, } from "semantic-ui-react";
 
 class Application extends Component {
   state = { application: null, steps: [], activeIndex: null, };
+
+  options = [
+    { key: 1, text: 'Edit', value: 1 },
+    { key: 2, text: 'Delete', value: 2 },
+  ]
 
   componentDidMount() {
     // this.setState({ activeIndex: this.state.steps.length - 1, });
@@ -35,21 +43,60 @@ class Application extends Component {
       })
   };
 
+  handleDelete = () => {
+    debugger
+  };
+
   renderSteps = () => {
     const { steps, activeIndex, } = this.state;
     if (steps.length === 0)
       return <p>No Steps</p>;
-    return steps.map( (s, i) => (
-      <Fragment>
-        <AccordionTitle active={activeIndex === i} index={i} onClick={this.handleClick}>
-          <Icon name='dropdown' />
-          <h2 style={{ marginTop: 0, }}>{s.title}</h2>
-        </AccordionTitle>
-        <AccordionContent active={activeIndex === i}>
-          <p>{s.notes}</p>
-        </AccordionContent>
-      </Fragment>
-    ));
+    return steps.map( (s, i) => {
+      // const formattedDate = moment(s.due_date).format("MMMM DD, YYYY @ HH:mm A")
+      const formattedDate = moment(s.due_date).format("M/DD/YY @ HH:mm A")
+      return (
+        <Fragment>
+          <AccordionTitle 
+            active={activeIndex === i} 
+            index={i} 
+            onClick={this.handleClick} 
+            style={{ display: "flex", justifyContent: "space-between", border: "1px solid #dededf",  background: "white", }}
+          >
+            <div style={{ display: "flex" }}>
+              <Icon name='dropdown' size="big" />
+              <h2 style={{ marginTop: 0, }}>{s.title}</h2>
+            </div>
+            <div style={{ display: "flex" }}>
+              {
+                s.complete ? 
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <Icon name="calendar check outline" size="big" color="green" />
+                    <Header as="h3" style={{ margin: 0, }} color="green">Complete</Header>
+                  </div>
+                :
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <Icon name="calendar alternate outline" size="big" color="blue" />
+                    <Header as="h3" style={{ margin: 0, }}>{formattedDate}</Header>
+                  </div>
+              }
+            </div>
+          </AccordionTitle>
+          <AccordionContent 
+            active={activeIndex === i} 
+            style={{ background: "white", marginLeft: "40px", borderLeft: "1px solid #dededf", borderRight: "1px solid #dededf",  }}
+          >
+            <Link to={`/`}>Edit</Link>
+            <p>Delete</p>
+            <div style={{ display: "flex", flexDirection: "row", }}>
+              <h4>Due Date:</h4>
+              { formattedDate }
+            </div>
+            <h4>Notes:</h4>
+            <p>{s.notes}</p>
+          </AccordionContent>
+        </Fragment>
+      )
+    });
   };
 
   render() {
@@ -60,18 +107,32 @@ class Application extends Component {
         },
       } = this.state;
       return (
-        <Container>
+        <Container style={{ marginBottom: "100px", }}>
           <br />
-          <Link to={`/applications/edit/${id}`}>
-            <UpdateButton>Edit Application</UpdateButton>
-          </Link>
-          <DeleteButton onClick={this.handleDelete}>Delete Application</DeleteButton>
-          <div style={{ display: "flex", alignItems: "center", }}>
-            <CompanyLogo alt='company-logo' src={company_image} />
-            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <Title>{`${position} at ${company_title}`}</Title>
-              <p>{company_location}</p>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", }}>
+            <div>
+              <CompanyLogo alt='company-logo' src={company_image} />
+              <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <Title>{`${position} at ${company_title}`}</Title>
+                <p>{company_location}</p>
+              </div>
             </div>
+            <Dropdown text={<Icon name="settings" size="big" />}>
+              <Dropdown.Menu style={{ width: "120px", }}>
+                <Link to={`/applications/edit/${id}`} style={{ color: "black" }}>
+                  <Dropdown.Item>
+                    Edit
+                  </Dropdown.Item>
+                </Link>
+                <Dropdown.Divider />
+                <Dropdown.Item 
+                  onClick={this.handleDelete}
+                  style={{ background: "#e44242", color: "white", fontWeight: "bold", }}
+                >
+                  Delete Application
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
           <br />
           <div style={{ display: "flex", }}>
@@ -90,8 +151,8 @@ class Application extends Component {
               <AddButton>Add Step</AddButton>
             </Link>
           </div>
-          <hr />
-          <Accordion styled fluid>
+          <br />
+          <Accordion fluid style={{ background: "none", }}>
             { this.renderSteps() }
           </Accordion>
           <br />

@@ -7,7 +7,10 @@ class Api::StepsController < ApplicationController
   end
 
   def create
-    step = @application.steps.create(step_params)
+    date = "#{params[:step][:due_date]} #{params[:step][:due_time]}"
+    step = @application.steps.new(step_params)
+    step.due_date = date
+    step.save
     render json: step
   end
 
@@ -17,7 +20,7 @@ class Api::StepsController < ApplicationController
     end
 
     def step_params
-      params.require(:step).permit(:title, :notes, :complete, :type_of, :due_date)
+      params.require(:step).permit(:title, :notes, :complete, :type_of)
     end
 
 end

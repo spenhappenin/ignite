@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux';
-import { Button, Checkbox, Container, Form, Header, Input, } from 'semantic-ui-react';
+import { Button, Container, Form, Header, Input, } from 'semantic-ui-react';
 
 class CompanyEditForm extends React.Component {
   state = { 
@@ -99,14 +99,6 @@ class CompanyEditForm extends React.Component {
             onChange={this.handleChange}
           />
           <br />
-          <Form.Field>
-            <Checkbox
-              name='applied'
-              onChange={this.toggleCheckbox}
-              label='Applied'
-              checked={applied}
-            />
-          </Form.Field>
           <Button type='submit'>Submit</Button>
         </Form>
         <br />

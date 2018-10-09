@@ -2,28 +2,23 @@ import React from 'react';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import { connect, } from 'react-redux';
-import { Button, Checkbox, Container, Form, Header, Input, } from 'semantic-ui-react';
+import { Button, Container, Form, Header, Input, } from 'semantic-ui-react';
 
 class CompanyForm extends React.Component {
   state = { applied: '', contacts: '', description: '', image: '', location: '', position: '', positionDetails: '', title: '', };
 
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value, });
-  };
+  handleChange = (e) => this.setState({ [e.target.name]: e.target.value, });
 
-  handleQuill = (value, name) => this.setState({ [name]: value });
+  handleQuill = (value, name) => this.setState({ [name]: value, });
 
   toggleCheckbox = () => this.setState({ applied: !this.state.applied, });
 
   handleSubmit = (e) => {
     const { applied, contacts, description, image, location, position, positionDetails, title, } = this.state;
-
     e.preventDefault();
     axios.post('/api/companies/new', { applied, contacts, description, image, location, position, position_details: positionDetails, title, })
       .then( res => {
         this.props.history.push('/companies');
-      })
-      .catch( err => {
       })
   };
 
@@ -68,39 +63,7 @@ class CompanyForm extends React.Component {
             required
             onChange={this.handleChange}
           />
-          <label>Contacts</label>
-          <ReactQuill
-            value={this.state.contacts}
-            name='contacts'
-            label='Contacts'
-            placeholder='Lits of contact information...'
-            required
-            onChange={(value) => this.handleQuill(value, 'contacts')}
-          />
-          <Form.Field
-            name='position'
-            control={Input}
-            label='Position'
-            placeholder='Front End Developer'
-            onChange={this.handleChange}
-          />
-          <label>Position Details</label>
-          <ReactQuill
-            value={this.state.positionDetails}
-            name='positionDetails'
-            label='Description'
-            placeholder='Ruby on Rails job that...'
-            required
-            onChange={(value) => this.handleQuill(value, 'positionDetails')}
-          />
           <br />
-          <Form.Field>
-            <Checkbox
-              name='applied'
-              onChange={this.toggleCheckbox}
-              label='Applied'
-            />
-          </Form.Field>
           <Button type='submit'>Submit</Button>
         </Form>
       </Container>

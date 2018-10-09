@@ -3,7 +3,8 @@
 }
 
 body {
-  background: #cecece !important
+  /* background: #cecece !important */
+  background: #ececec !important
 }
 
 #canvas-container {
